@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendação de Tratamento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .frame {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none; /* Ocultar inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Recomendação de Tratamento Personalizado</h1>
+
+        <form method="post" action="/predict">
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" class="form-control" name="idade" placeholder="Informe o sua idade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tamanho_tumor">Tamanho do Tumor:</label>
+                <input type="number" class="form-control" name="tamanho_tumor" placeholder="Informe o tamanho do tumor" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="status_hormonal">Status Hormonal:</label>
+                <select class="form-control" name="status_hormonal" required>
+                    <option value="1">Positivo</option>
+                    <option value="0">Negativo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estadiamento">Estadiamento do Tumor:</label>
+                <select class="form-control" name="estadiamento" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="receptor_estrogenio">Receptor de Estrogênio:</label>
+                <select class="form-control" name="receptor_estrogenio" required>
+                    <option value="1">Positivo</option>
+                    <option value="0">Negativo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="receptor_progesterona">Receptor de Progesterona:</label>
+                <select class="form-control" name="receptor_progesterona" required>
+                    <option value="1">Positivo</option>
+                    <option value="0">Negativo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="her2_neu">HER2/Neu:</label>
+                <select class="form-control" name="her2_neu" required>
+                    <option value="1">Positivo</option>
+                    <option value="0">Negativo</option>
+                </select>
+            </div>
+
+            <!-- Adicione outros campos conforme necessário -->
+
+            <button type="submit" class="btn btn-primary">Obter Recomendação</button>
+        </form>
+
+        {% if prediction %}
+            <h2 class="mt-4">Recomendação de Tratamento: {{ prediction }}</h2>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
